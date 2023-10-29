@@ -5,6 +5,6 @@ import { supabase } from '$lib/supabase'
 
 export const load: PageLoad = async ({  params  }) => {
 	const { data } = await supabase.from("articles").select('*').eq('title', params.slug)
-
+	
 	return  data[0]
 };

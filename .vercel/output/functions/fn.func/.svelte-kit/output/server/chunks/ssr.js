@@ -137,16 +137,23 @@ function create_ssr_component(fn) {
     $$render
   };
 }
+function add_attribute(name, value, boolean) {
+  if (value == null || boolean && !value)
+    return "";
+  const assignment = boolean && value === true ? "" : `="${escape(value, true)}"`;
+  return ` ${name}${assignment}`;
+}
 export {
-  setContext as a,
-  subscribe as b,
+  createEventDispatcher as a,
+  setContext as b,
   create_ssr_component as c,
-  createEventDispatcher as d,
+  add_attribute as d,
   escape as e,
   each as f,
   getContext as g,
+  safe_not_equal as h,
   missing_component as m,
   noop as n,
-  safe_not_equal as s,
+  subscribe as s,
   validate_component as v
 };

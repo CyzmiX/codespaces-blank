@@ -1,7 +1,7 @@
 import { json } from '@sveltejs/kit';
 import { supabase } from '$lib/supabase'
 import type { RequestHandler } from '$types';
-
+import sanitizeHtml from 'sanitize-html';
 
 interface Blog {
 	title: string 
@@ -19,7 +19,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			id: +req.id,
 			title: req.title,
 			desc: req.desc,
-			content: req.content,
+			content: sanitizeHtml(req.content),
 			date: req.date
 		}
 	)
